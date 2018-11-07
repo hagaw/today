@@ -1,19 +1,53 @@
 package com.example.demo;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.naming.Binding;
+import javax.validation.Valid;
+import javax.xml.soap.SAAJResult;
+import java.security.Principal;
 
 @Controller
 
 public class HomeController {
+    @Autowired
+    private UserService userService;
+    @GetMapping("/register")
+
+    public String showRegistrationPage(Model model){
+        model.addAttribute("user",new User());
+        return "registration";
+    }
+    @PostMapping("/register")
+    public String processRegistrationPage(@Valid
+     @ModelAttribute("user") User user,BindingResult result,
+    Model model){
+        model.addAttribute("user", user);
+
+        if (result.hasErrors()){
+            return "register";
+        }else {
+            userService.saveUser(user);
+            model.addAttribute("message","User Account Created");
+        }
+        return "index";
+    }
+
+    //===============================================
 
     @RequestMapping("/")
 
     public String index(){
         return "index";
-
-
-
     }
 
     @RequestMapping("/login")
@@ -21,11 +55,15 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/admin")
+    @RequestMapping("/secure")
 
-    public String admin(){
+    public String secure(Principal principal, Model model){
 
-        return "admin";
+          User myuser=((CustomUserDetails)
+                ((UsernamePasswordAuthenticationToken)principal) .getPrincipal()).getUser();
+                 model.addAttribute("myuser",myuser);
+                 return "secure";
+
     }
 }
 

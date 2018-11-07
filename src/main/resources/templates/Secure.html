@@ -13,12 +13,13 @@
 
 
 <body>
+<h3>Secure page</h3>
+<a href="/logout">Logout</a>
 
-<h2>Insecure page</h2>
-
-<a href="/secure">Secure Page</a>
-<h1>This is My project in designing pass word</h1>
-
+<h4>Email</h4>
+<p th:text="${myuser.email}"></p></br>
+<h4>last name</h4>
+    <p th:text="${myuser.lastName}"></p>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
