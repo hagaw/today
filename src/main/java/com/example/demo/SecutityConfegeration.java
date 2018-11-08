@@ -24,7 +24,6 @@ import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
-
 public class SecutityConfegeration extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -33,7 +32,6 @@ public class SecutityConfegeration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-
     private SSUserDetailsService userDetailsService;
 
     @Autowired
@@ -53,7 +51,7 @@ public class SecutityConfegeration extends WebSecurityConfigurerAdapter {
 
 //                 .antMatchers("/", "/h2-console/**").permitAll()
 
-                .antMatchers("/"," /h2-console/**","/register").permitAll()
+                .antMatchers("/","/h2-console/**","/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

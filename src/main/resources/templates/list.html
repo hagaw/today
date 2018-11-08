@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+
+        </head>
+
+<body>
+<a href="/add">Add a Course</a><br/>
+
+<table>
+    <tr>
+        <th>Title</th>;
+        <th>Instructor</th>nbsp;
+        <th>Credits</th>nbsp;
+        <th>Action</th>nbsp;
+    </tr>
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.title}"></td>
+        <td th:text="${course.instructor}"></td>
+        <td th:text="${course.credit}"></td>
+        <td>
+            <a th:href="@{/update/{id}(id=${course.id})}">Update</a>
+            <a th:href="@{/detail/{id}(id=${course.id})}">Details</a>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/delete/{id}(id=${course.id})}">Delete</a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

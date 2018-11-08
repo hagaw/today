@@ -1,6 +1,4 @@
 package com.example.demo;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,13 +10,10 @@ import java.util.Arrays;
 @Component
 
 public class DataLoader implements CommandLineRunner{
-
     @Autowired
-
     UserRepository userReopsitory;
 
     @Autowired
-
     RoleRepository roleRepository;
 
     @Override
